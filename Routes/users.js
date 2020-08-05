@@ -58,7 +58,7 @@ router.post('/register', async(req, res) => {
                     user.password = hash; //if hashing succes then initialize the user.password (line 49) to hashed password
                     await user.save() //save the user to the database
                         .then(user => {
-                            req.flash('sukses', 'You are now registered!'); //send success alert
+                            req.flash('sukses', 'You are now registered!'); //send success alert when success (check router.js on global variable)
                             res.redirect('/api/users/login'); //redirect to login view
                         })
                         .catch(err => console.error(err));
