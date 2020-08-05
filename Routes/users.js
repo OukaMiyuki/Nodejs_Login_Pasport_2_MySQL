@@ -45,6 +45,25 @@ router.post('/register', async(req, res) => {
                 password,
                 password2
             });
+        } else {
+            const user = new User({
+                name,
+                email,
+                password
+            });
+
+            await bcrypt.genSalt(10, (err, salt) => bcrypt.hash(
+                user.password, salt, async(err, hash) => {
+                    if (err) throw err;
+                    user.password = hash;
+                    await user.save()
+                        .then(user => {
+                            req.flash('sukses', 'You are now registered!'); //send success alert
+                            res.redirect('/api/users/login'); //redirect to login view
+                        })
+                        .catch(err => console.error(err));
+                }
+            ));
         }
 
     }
