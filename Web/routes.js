@@ -21,10 +21,10 @@ module.exports = function(app) {
 
     app.use(flash());
     //global var
-    app.use((req, res, next) => {
-        res.locals.sukses = req.flash('sukses'); //when register is success
-        res.locals.gagal = req.flash('gagal'); //when register is failed
-        res.locals.error_login = req.flash('error'); //when login is failed
+    app.use((req, res, next) => { //creating global variables
+        res.locals.sukses = req.flash('sukses'); //message when register is success
+        res.locals.gagal = req.flash('gagal'); //message when register is failed
+        res.locals.error_login = req.flash('error'); //message when login is failed
         next();
     });
 
