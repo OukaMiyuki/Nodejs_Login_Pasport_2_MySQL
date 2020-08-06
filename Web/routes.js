@@ -5,6 +5,7 @@ const users = require('../Routes/users');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+require('../Config/passport')(passport); //passing passport to /Config/passport.js (line 5)
 
 module.exports = function(app) {
     app.use(express.json());
@@ -18,6 +19,11 @@ module.exports = function(app) {
         resave: true,
         saveUninitialized: true
     }));
+
+    //have to put this after the express session middleware
+    //pasport middleware
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use(flash());
     //global var
