@@ -78,4 +78,10 @@ router.post('/login', (req, res, next) => {
     })(req, res, next); //function parenthesis or invoke function javascript
 });
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('sukses', 'You have logged out');
+    res.redirect('/api/users/login');
+});
+
 module.exports = router;
